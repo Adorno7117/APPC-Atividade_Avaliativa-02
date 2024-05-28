@@ -1,8 +1,8 @@
 tabelaFuncionario = {}
 
 def exibir_menu():   
-    print(36 * "=")
-    print("Menu:")
+    print(36 * "\n\n=")
+    print("\t\tMenu:")
     print(36 * "=")
     print("1. Inserir funcionario")
     print("2. Remover Funcionario")
@@ -12,7 +12,7 @@ def exibir_menu():
     print("6. Funcionario com mais faltas")
     print("7. Listar todos os funcionários")
     print("0. Sair")
-    print(36 * "-")
+    print(36 * "=")
 
 def calcula_desconto(salarioFixo, numFalta):
     if salarioFixo <= 2259.20:
@@ -20,16 +20,16 @@ def calcula_desconto(salarioFixo, numFalta):
         imposto = 0
     elif salarioFixo <= 2828.65:
         salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.075)
-        imposto = 7,5
+        imposto = 7.5
     elif salarioFixo <= 3751.05:
         salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.15)
         imposto = 15
     elif salarioFixo <= 4664.68:
         salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.225)
-        imposto = 22,5
+        imposto = 22.5
     else:
         salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.275)
-        imposto = 27,5
+        imposto = 275
     
     return [imposto, salarioLiq]
 
@@ -42,7 +42,7 @@ def adicionar_funcionario():
         
     nome = str(input("Digite o nome do funcionario: "))
     
-    print("\nMenu:")
+    print("\n\t\tMenu:")
     print(36 * "=")
     print("101. Vendedor")
     print("102- Administrativo")
@@ -135,12 +135,12 @@ def maiorSalarioLiquido():
         if dados['salario_liquido'] > maiorSalario:
             maiorSalario = dados['salario_liquido']
             matriculaFuncionario = matricula
-        
+
     print(f"{matriculaFuncionario:<10} {tabelaFuncionario[matriculaFuncionario]['nome']:<20} {tabelaFuncionario[matriculaFuncionario]['codigo']:<20} {tabelaFuncionario[matriculaFuncionario]['numero_faltas']:<18} R$ {tabelaFuncionario[matriculaFuncionario]['salario_bruto']:<14.2f} R$ {tabelaFuncionario[matriculaFuncionario]['salario_liquido']:<14.2f} {tabelaFuncionario[matriculaFuncionario]['imposto']:<10}%")
             
 def maiorNumFaltas():
     matriculaFuncionario = 0
-    faltas = 0
+    faltas = -1
 
     print(f"\n{'Matricula':<10} {'Nome':<20} {'Código da Função':<20} {'Número de Faltas':<18} {'Desconto Salário':<15}")
     print("-" * 116)
@@ -149,8 +149,10 @@ def maiorNumFaltas():
         if dados['numero_faltas'] > faltas:
             faltas = dados['numero_faltas']
             matriculaFuncionario = matricula
+                  
+    desconto = tabelaFuncionario[matriculaFuncionario]['salario_bruto'] - tabelaFuncionario[matriculaFuncionario]['salario_liquido']
 
-    print(f"{matriculaFuncionario:<10} {tabelaFuncionario[matriculaFuncionario]['nome']:<20} {tabelaFuncionario[matriculaFuncionario]['codigo']:<20} {tabelaFuncionario[matriculaFuncionario]['numero_faltas']:<18} R$ {(tabelaFuncionario[matriculaFuncionario]['salario_bruto'] - tabelaFuncionario[matriculaFuncionario]['salario_liquido']):<14.2f} ")
+    print(f"{matriculaFuncionario:<10} {tabelaFuncionario[matriculaFuncionario]['nome']:<20} {tabelaFuncionario[matriculaFuncionario]['codigo']:<20} {tabelaFuncionario[matriculaFuncionario]['numero_faltas']:<18} R$ {(desconto):<14.2f} ")
         
 while True:
     exibir_menu()
