@@ -1,7 +1,7 @@
 tabelaFuncionario = {}
 
 def exibir_menu():   
-    print(36 * "\n\n=")
+    print(36 * "=")
     print("\t\tMenu:")
     print(36 * "=")
     print("1. Inserir funcionario")
@@ -10,7 +10,6 @@ def exibir_menu():
     print("4. Determinar relatorio de funcionarios")
     print("5. Funcionario com maior salario líquido")
     print("6. Funcionario com mais faltas")
-    print("7. Listar todos os funcionários")
     print("0. Sair")
     print(36 * "=")
 
@@ -29,7 +28,7 @@ def calcula_desconto(salarioFixo, numFalta):
         imposto = 22.5
     else:
         salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.275)
-        imposto = 275
+        imposto = 27.5
     
     return [imposto, salarioLiq]
 
@@ -54,6 +53,10 @@ def adicionar_funcionario():
         codigo = int(input("Digite um codigo válido: "))
     
     numFalta = int(input("Digite o número de faltas: "))
+
+    while numFalta >= 31:
+        print("\nNumero de Faltas Invalido!")
+        codigo = int(input("Digite um numero de faltas válido: "))
     
     if codigo == 101:
         valorVenda = float(input("Digite o valor de vendas/mês do vendedor: R$ "))
@@ -153,8 +156,10 @@ def maiorNumFaltas():
     desconto = tabelaFuncionario[matriculaFuncionario]['salario_bruto'] - tabelaFuncionario[matriculaFuncionario]['salario_liquido']
 
     print(f"{matriculaFuncionario:<10} {tabelaFuncionario[matriculaFuncionario]['nome']:<20} {tabelaFuncionario[matriculaFuncionario]['codigo']:<20} {tabelaFuncionario[matriculaFuncionario]['numero_faltas']:<18} R$ {(desconto):<14.2f} ")
-        
-while True:
+
+opcaoMenu = 1       
+
+while opcaoMenu != 0:
     exibir_menu()
     
     opcaoMenu = int(input('Escolha uma opção: '))
@@ -171,8 +176,6 @@ while True:
         maiorSalarioLiquido()
     elif opcaoMenu == 6:
         maiorNumFaltas()
-    elif opcaoMenu == 7:
-        print(tabelaFuncionario)
     elif opcaoMenu == 0:
         break
     else:
