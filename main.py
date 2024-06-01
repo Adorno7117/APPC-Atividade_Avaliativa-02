@@ -15,20 +15,23 @@ def exibir_menu():
 
 def calcula_desconto(salarioFixo, numFalta):
     if salarioFixo <= 2259.20:
-        salarioLiq = salarioFixo - ((salarioFixo / 30) * numFalta)
+        salarioLiq = salarioFixo - ((salarioFixo / 31) * numFalta)
         imposto = 0
     elif salarioFixo <= 2828.65:
-        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.075)
+        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 31) * numFalta)) * 0.075)
         imposto = 7.5
     elif salarioFixo <= 3751.05:
-        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.15)
+        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 31) * numFalta)) * 0.15)
         imposto = 15
     elif salarioFixo <= 4664.68:
-        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.225)
+        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 31) * numFalta)) * 0.225)
         imposto = 22.5
     else:
-        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 30) * numFalta)) * 0.275)
+        salarioLiq = salarioFixo - ((salarioFixo - ((salarioFixo / 31) * numFalta)) * 0.275)
         imposto = 27.5
+        
+    if salarioLiq < 0:
+        salarioLiq = 0
     
     return [imposto, salarioLiq]
 
@@ -54,9 +57,9 @@ def adicionar_funcionario():
     
     numFalta = int(input("Digite o número de faltas: "))
 
-    while numFalta >= 31:
+    while numFalta > 31:
         print("\nNumero de Faltas Invalido!")
-        codigo = int(input("Digite um numero de faltas válido: "))
+        numFalta = int(input("Digite um numero de faltas válido: "))
     
     if codigo == 101:
         valorVenda = float(input("Digite o valor de vendas/mês do vendedor: R$ "))
@@ -64,7 +67,6 @@ def adicionar_funcionario():
         
     else:
         salarioFixo = float(input("Digite o Salario Fixo do funcionário: "))
-        
         
         while salarioFixo < 2150.00 or salarioFixo > 6950.00:
             print("\nSalário Invalido!")
@@ -82,7 +84,6 @@ def adicionar_funcionario():
         "imposto": impostoAndSalarioLiq[0],
     }
     print(f"Funcionario {nome} inserido com sucesso!")
-    print(tabelaFuncionario[matricula])
 
 def remover_funcionario ():
     matricula = int(input('\nDigite o número da matricula do funcionario a ser removido: '))
